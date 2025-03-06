@@ -1,0 +1,14 @@
+{
+  "last_run": "2025-03-05 18:31:38",
+  "days_collected": 30,
+  "total_symbols": 5742,
+  "successful_symbols": 5678,
+  "failed_symbols": 64,
+  "rate_limited_symbols": 0,
+  "cache_hits": 0,
+  "success_rate": 98.8854057819575,
+  "avg_time_per_symbol": 0.8936724376279856,
+  "execution_time_seconds": 5131.467136859894,
+  "batch_size": 5,
+  "batch_pause": 1.5
+}
