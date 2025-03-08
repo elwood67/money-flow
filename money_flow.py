@@ -419,7 +419,7 @@ def main():
                         industry_sorted['market_cap_change_B'] = industry_sorted['market_cap_change'] / 1e9
                         industry_sorted['start_market_cap_B'] = industry_sorted['start_market_cap'] / 1e9
                         
-                        # Create bar chart
+                        # Create bar chart with modifications for showing all labels
                         fig = px.bar(
                             industry_sorted,
                             y='industry',
@@ -443,10 +443,27 @@ def main():
                                 'symbol': 'Number of Stocks',
                                 'price_change_pct': 'Avg Price Change (%)'
                             },
-                            height=1200
+                            height=max(1200, 25 * len(industry_sorted))  # Dynamic height based on number of industries
                         )
                         
-                        fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+                        # Update layout to ensure all y-axis labels (industries) are shown
+                        fig.update_layout(
+                            yaxis={
+                                'categoryorder': 'total ascending',
+                                'showticklabels': True,
+                                'tickmode': 'array',
+                                'tickvals': list(range(len(industry_sorted))),
+                                'ticktext': industry_sorted['industry'].tolist()
+                            },
+                            margin=dict(l=250)  # Increase left margin to make space for long industry names
+                        )
+                        
+                        # Ensure all ticks are visible
+                        fig.update_yaxes(
+                            tickfont=dict(size=10),  # Adjust font size if needed
+                            automargin=True  # Automatically adjust margins to fit labels
+                        )
+                        
                         st.plotly_chart(fig, use_container_width=True)
                     
                     with tab2:
